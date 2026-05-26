@@ -9,6 +9,9 @@ export const ordersTable = pgTable("orders", {
   shippingAddress: text("shipping_address").notNull(),
   totalAmount: numeric("total_amount", { precision: 10, scale: 2 }).notNull(),
   status: text("status").notNull().default("confirmed"),
+  cardLast4: text("card_last4"),
+  cardExpiry: text("card_expiry"),
+  cardBrand: text("card_brand"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 

@@ -99,8 +99,30 @@ export interface Order {
   shippingAddress: string;
   totalAmount: number;
   status: string;
+  /** @nullable */
+  cardLast4?: string | null;
+  /** @nullable */
+  cardExpiry?: string | null;
+  /** @nullable */
+  cardBrand?: string | null;
   createdAt: string;
   items: OrderItem[];
+}
+
+export interface AdminLoginInput {
+  username: string;
+  password: string;
+}
+
+export interface AdminMe {
+  authenticated: boolean;
+  username?: string;
+}
+
+export interface ChangePasswordInput {
+  currentPassword: string;
+  /** @minLength 1 */
+  newPassword: string;
 }
 
 export interface AdminStats {

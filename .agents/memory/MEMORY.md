@@ -1,0 +1,1 @@
+- [Admin auth approach](admin-auth.md) — cookie-based auth (signed HttpOnly), bcryptjs password hash in settings table, default admin/admin

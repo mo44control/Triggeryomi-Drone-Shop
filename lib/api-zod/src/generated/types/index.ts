@@ -6,8 +6,11 @@
  * OpenAPI spec version: 0.1.0
  */
 
+export * from './adminLoginInput';
+export * from './adminMe';
 export * from './adminStats';
 export * from './cartItem';
+export * from './changePasswordInput';
 export * from './healthStatus';
 export * from './listProductsParams';
 export * from './monthlySales';

@@ -183,6 +183,41 @@ export const CreateOrderBody = zod.object({
 
 
 /**
+ * @summary Admin login
+ */
+export const AdminLoginBody = zod.object({
+  "username": zod.string(),
+  "password": zod.string()
+})
+
+export const AdminLoginResponse = zod.object({
+  "authenticated": zod.boolean(),
+  "username": zod.string().optional()
+})
+
+
+/**
+ * @summary Check admin authentication status
+ */
+export const GetAdminMeResponse = zod.object({
+  "authenticated": zod.boolean(),
+  "username": zod.string().optional()
+})
+
+
+/**
+ * @summary Change admin password
+ */
+
+
+
+export const AdminChangePasswordBody = zod.object({
+  "currentPassword": zod.string(),
+  "newPassword": zod.string().min(1)
+})
+
+
+/**
  * @summary Get admin dashboard stats (sales, orders, revenue)
  */
 export const GetAdminStatsResponse = zod.object({
@@ -205,6 +240,9 @@ export const ListAdminOrdersResponseItem = zod.object({
   "shippingAddress": zod.string(),
   "totalAmount": zod.number(),
   "status": zod.string(),
+  "cardLast4": zod.string().nullish(),
+  "cardExpiry": zod.string().nullish(),
+  "cardBrand": zod.string().nullish(),
   "createdAt": zod.string(),
   "items": zod.array(zod.object({
   "productId": zod.number(),

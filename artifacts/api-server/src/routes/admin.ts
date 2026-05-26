@@ -2,8 +2,11 @@ import { Router } from "express";
 import { db } from "@workspace/db";
 import { ordersTable, orderItemsTable, productsTable } from "@workspace/db";
 import { sql, eq, gte } from "drizzle-orm";
+import { requireAdminAuth } from "../middleware/admin-auth";
 
 const router = Router();
+
+router.use(requireAdminAuth);
 
 router.get("/admin/stats", async (req, res) => {
   const [totals] = await db
@@ -66,15 +69,18 @@ router.get("/admin/orders", async (req, res) => {
         shippingAddress: order.shippingAddress,
         totalAmount: parseFloat(order.totalAmount),
         status: order.status,
+        cardLast4: order.cardLast4 ?? null,
+        cardExpiry: order.cardExpiry ?? null,
+        cardBrand: order.cardBrand ?? null,
         createdAt: order.createdAt.toISOString(),
-        items: items.map(i => ({
+        items: items.map((i) => ({
           productId: i.productId,
           quantity: i.quantity,
           priceAtPurchase: parseFloat(i.priceAtPurchase),
           productName: i.productName,
         })),
       };
-    })
+    }),
   );
 
   res.json(result);
@@ -98,14 +104,14 @@ router.get("/admin/monthly-sales", async (req, res) => {
   ];
 
   res.json(
-    rows.map(r => ({
+    rows.map((r) => ({
       month: (() => {
-        const [year, mon] = r.month.split("-");
-        return `${months[parseInt(mon) - 1]} ${year}`;
+        const [, mon] = r.month.split("-");
+        return `${months[parseInt(mon) - 1]}`;
       })(),
       orders: Number(r.orders),
       revenue: Number(r.revenue),
-    }))
+    })),
   );
 });
 

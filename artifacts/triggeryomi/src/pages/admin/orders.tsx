@@ -2,6 +2,7 @@ import { useListAdminOrders } from "@workspace/api-client-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Badge } from "@/components/ui/badge";
 import { AdminLayout } from "@/components/layout/admin-layout";
+import { CreditCard } from "lucide-react";
 
 export function AdminOrders() {
   const { data: orders, isLoading } = useListAdminOrders();
@@ -26,6 +27,7 @@ export function AdminOrders() {
                   <th className="text-left px-4 py-3 font-mono text-xs uppercase tracking-wider text-muted-foreground">Order</th>
                   <th className="text-left px-4 py-3 font-mono text-xs uppercase tracking-wider text-muted-foreground hidden md:table-cell">Customer</th>
                   <th className="text-left px-4 py-3 font-mono text-xs uppercase tracking-wider text-muted-foreground hidden lg:table-cell">Items</th>
+                  <th className="text-left px-4 py-3 font-mono text-xs uppercase tracking-wider text-muted-foreground hidden xl:table-cell">Card</th>
                   <th className="text-right px-4 py-3 font-mono text-xs uppercase tracking-wider text-muted-foreground">Total</th>
                   <th className="text-center px-4 py-3 font-mono text-xs uppercase tracking-wider text-muted-foreground">Status</th>
                   <th className="text-right px-4 py-3 font-mono text-xs uppercase tracking-wider text-muted-foreground hidden sm:table-cell">Date</th>
@@ -54,9 +56,26 @@ export function AdminOrders() {
                           </p>
                         ))}
                         {order.items.length > 2 && (
-                          <p className="text-xs text-muted-foreground font-mono">+{order.items.length - 2} more</p>
+                          <p className="text-xs text-muted-foreground font-mono">
+                            +{order.items.length - 2} more
+                          </p>
                         )}
                       </div>
+                    </td>
+                    <td className="px-4 py-4 hidden xl:table-cell">
+                      {order.cardLast4 ? (
+                        <div className="flex items-center gap-1.5">
+                          <CreditCard className="h-3 w-3 text-muted-foreground flex-shrink-0" />
+                          <div>
+                            <p className="font-mono text-xs">{order.cardBrand} ••••{order.cardLast4}</p>
+                            {order.cardExpiry && (
+                              <p className="font-mono text-xs text-muted-foreground">{order.cardExpiry}</p>
+                            )}
+                          </div>
+                        </div>
+                      ) : (
+                        <span className="text-xs text-muted-foreground font-mono">—</span>
+                      )}
                     </td>
                     <td className="px-4 py-4 text-right">
                       <span className="font-mono font-bold">${order.totalAmount.toFixed(2)}</span>
@@ -76,7 +95,10 @@ export function AdminOrders() {
                 ))}
                 {orders?.length === 0 && (
                   <tr>
-                    <td colSpan={6} className="px-4 py-12 text-center text-muted-foreground font-mono text-sm">
+                    <td
+                      colSpan={7}
+                      className="px-4 py-12 text-center text-muted-foreground font-mono text-sm"
+                    >
                       No orders yet. Orders will appear here after customers checkout.
                     </td>
                   </tr>

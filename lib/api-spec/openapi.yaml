@@ -192,6 +192,68 @@ paths:
               schema:
                 $ref: "#/components/schemas/Order"
 
+  /admin/login:
+    post:
+      operationId: adminLogin
+      tags: [admin]
+      summary: Admin login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AdminLoginInput"
+      responses:
+        "200":
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdminMe"
+        "401":
+          description: Invalid credentials
+
+  /admin/logout:
+    post:
+      operationId: adminLogout
+      tags: [admin]
+      summary: Admin logout
+      responses:
+        "200":
+          description: Logged out
+
+  /admin/me:
+    get:
+      operationId: getAdminMe
+      tags: [admin]
+      summary: Check admin authentication status
+      responses:
+        "200":
+          description: Authenticated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdminMe"
+        "401":
+          description: Not authenticated
+
+  /admin/change-password:
+    post:
+      operationId: adminChangePassword
+      tags: [admin]
+      summary: Change admin password
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChangePasswordInput"
+      responses:
+        "200":
+          description: Password changed successfully
+        "401":
+          description: Invalid current password
+
   /admin/stats:
     get:
       operationId: getAdminStats
@@ -405,12 +467,46 @@ components:
           type: number
         status:
           type: string
+        cardLast4:
+          type: ["string", "null"]
+        cardExpiry:
+          type: ["string", "null"]
+        cardBrand:
+          type: ["string", "null"]
         createdAt:
           type: string
         items:
           type: array
           items:
             $ref: "#/components/schemas/OrderItem"
+
+    AdminLoginInput:
+      type: object
+      required: [username, password]
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+
+    AdminMe:
+      type: object
+      required: [authenticated]
+      properties:
+        authenticated:
+          type: boolean
+        username:
+          type: string
+
+    ChangePasswordInput:
+      type: object
+      required: [currentPassword, newPassword]
+      properties:
+        currentPassword:
+          type: string
+        newPassword:
+          type: string
+          minLength: 1
 
     AdminStats:
       type: object

@@ -14,6 +14,12 @@ export interface Order {
   shippingAddress: string;
   totalAmount: number;
   status: string;
+  /** @nullable */
+  cardLast4?: string | null;
+  /** @nullable */
+  cardExpiry?: string | null;
+  /** @nullable */
+  cardBrand?: string | null;
   createdAt: string;
   items: OrderItem[];
 }

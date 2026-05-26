@@ -1,15 +1,22 @@
 import { ReactNode } from "react";
 import { Link, useLocation } from "wouter";
-import { Hexagon, LayoutDashboard, Package, ShoppingCart, LogOut } from "lucide-react";
+import { Hexagon, LayoutDashboard, Package, ShoppingCart, Settings, LogOut } from "lucide-react";
+import { useAdminAuth } from "@/hooks/use-admin-auth";
 
 export function AdminLayout({ children }: { children: ReactNode }) {
   const [location] = useLocation();
+  const { logout } = useAdminAuth();
 
   const navItems = [
     { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
     { href: "/admin/products", label: "Products", icon: Package },
     { href: "/admin/orders", label: "Orders", icon: ShoppingCart },
+    { href: "/admin/settings", label: "Settings", icon: Settings },
   ];
+
+  const handleLogout = async () => {
+    await logout();
+  };
 
   return (
     <div className="min-h-[100dvh] flex flex-col md:flex-row bg-background text-foreground dark">
@@ -18,17 +25,19 @@ export function AdminLayout({ children }: { children: ReactNode }) {
           <Hexagon className="h-6 w-6 text-primary" />
           <span>Omi<span className="text-primary">Command</span></span>
         </div>
-        
+
         <nav className="flex flex-col gap-2 flex-1">
           {navItems.map((item) => {
-            const isActive = location === item.href || (item.href !== "/admin" && location.startsWith(item.href));
+            const isActive =
+              location === item.href ||
+              (item.href !== "/admin" && location.startsWith(item.href));
             return (
               <Link
                 key={item.href}
                 href={item.href}
                 className={`flex items-center gap-3 px-3 py-2 rounded-md transition-colors text-sm font-medium ${
-                  isActive 
-                    ? "bg-primary text-primary-foreground" 
+                  isActive
+                    ? "bg-primary text-primary-foreground"
                     : "text-muted-foreground hover:bg-secondary hover:text-foreground"
                 }`}
               >
@@ -38,20 +47,25 @@ export function AdminLayout({ children }: { children: ReactNode }) {
             );
           })}
         </nav>
-        
-        <div className="mt-auto pt-4 border-t border-border">
+
+        <div className="mt-auto pt-4 border-t border-border space-y-1">
           <Link
             href="/"
             className="flex items-center gap-3 px-3 py-2 rounded-md transition-colors text-sm font-medium text-muted-foreground hover:bg-secondary hover:text-foreground"
           >
             <LogOut className="h-4 w-4" />
-            Exit Command
+            Exit to Store
           </Link>
+          <button
+            onClick={handleLogout}
+            className="w-full flex items-center gap-3 px-3 py-2 rounded-md transition-colors text-sm font-medium text-muted-foreground hover:bg-destructive/10 hover:text-destructive"
+          >
+            <LogOut className="h-4 w-4" />
+            Sign Out
+          </button>
         </div>
       </aside>
-      <main className="flex-1 p-6 md:p-8 overflow-auto">
-        {children}
-      </main>
+      <main className="flex-1 p-6 md:p-8 overflow-auto">{children}</main>
     </div>
   );
 }
