@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "TriggeryOmi Drones"
+version = "1.0.0"
+id = "artifacts/triggeryomi"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 19320
+
+[services.development]
+run = "pnpm --filter @workspace/triggeryomi run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/triggeryomi", "run", "build" ]
+publicDir = "artifacts/triggeryomi/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "19320"
+BASE_PATH = "/"
