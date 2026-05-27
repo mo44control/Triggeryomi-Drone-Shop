@@ -1,0 +1,116 @@
+ [api internal] load build definition from Dockerfile.api                                                       0.0s
+ => => transferring dockerfile: 1.65kB                                                                             0.0s
+ => [api internal] load metadata for docker.io/library/node:24-alpine                                              0.5s
+ => [web internal] load metadata for docker.io/library/nginx:alpine                                                0.5s
+ => [web internal] load .dockerignore                                                                              0.0s
+ => => transferring context: 133B                                                                                  0.0s
+ => [api internal] load .dockerignore                                                                              0.0s
+ => => transferring context: 133B                                                                                  0.0s
+ => [web builder 1/8] FROM docker.io/library/node:24-alpine@sha256:2bdb65ed1dab192432bc31c95f94155ca5ad7fc1392fb7  3.4s
+ => => resolve docker.io/library/node:24-alpine@sha256:2bdb65ed1dab192432bc31c95f94155ca5ad7fc1392fb7eb7526ab682f  0.0s
+ => => sha256:2bdb65ed1dab192432bc31c95f94155ca5ad7fc1392fb7eb7526ab682fa5bf14 3.87kB / 3.87kB                     0.0s
+ => => sha256:9a2c6269f83d74af45665c0b738b78c7b5f07bf2374c72a4c540065a975b9693 1.72kB / 1.72kB                     0.0s
+ => => sha256:22114f5b47161a597998c48e339fac8ded77f7bba0a14c595e6a139afdf49cd8 6.52kB / 6.52kB                     0.0s
+ => => sha256:eea2c8c31119c028a455d4bf33b2d3db30709fc3cbe5731a86fd418a2f2a047b 52.28MB / 52.28MB                   1.8s
+ => => sha256:414f813165cf3485659f259590b5a84ca11c7caa28c508fff740ddb7f59f00ef 1.26MB / 1.26MB                     0.2s
+ => => sha256:c7fd89fde4162535dc23357092d0e79d83508e8176f3aee3aef4a3a20ec1f450 445B / 445B                         0.1s
+ => => extracting sha256:eea2c8c31119c028a455d4bf33b2d3db30709fc3cbe5731a86fd418a2f2a047b                          1.3s
+ => => extracting sha256:414f813165cf3485659f259590b5a84ca11c7caa28c508fff740ddb7f59f00ef                          0.0s
+ => => extracting sha256:c7fd89fde4162535dc23357092d0e79d83508e8176f3aee3aef4a3a20ec1f450                          0.0s
+ => [web internal] load build context                                                                              0.0s
+ => => transferring context: 675.11kB                                                                              0.0s
+ => [web stage-1 1/3] FROM docker.io/library/nginx:alpine@sha256:8b1e78743a03dbb2c95171cc58639fef29abc8816598e27f  1.7s
+ => => resolve docker.io/library/nginx:alpine@sha256:8b1e78743a03dbb2c95171cc58639fef29abc8816598e27fb910ed2e621e  0.0s
+ => => sha256:8b1e78743a03dbb2c95171cc58639fef29abc8816598e27fb910ed2e621e589a 10.33kB / 10.33kB                   0.0s
+ => => sha256:31db9045b34376493fd4fb695d8a8d03bbfffaf6297fcde82d0f925ce2dd329a 2.50kB / 2.50kB                     0.0s
+ => => sha256:da954fb959a34e2195e6bf622e6396bf338f99e0fe6d8e641b302d9aaa1f0645 12.41kB / 12.41kB                   0.0s
+ => => sha256:43f834d60d8af3f133c7e76a202d28cd62cc026a561edca72ee752ef01bfaacd 628B / 628B                         0.2s
+ => => sha256:abaae85d1626e429b3f1209aea369c0af9562cc06b5e075c006e0f699bba35f2 1.88MB / 1.88MB                     0.2s
+ => => extracting sha256:abaae85d1626e429b3f1209aea369c0af9562cc06b5e075c006e0f699bba35f2                          0.1s
+ => => sha256:de1b677d8c003ce9e558f3a0cd4dec3c035f424ecddd68063043a593ad572257 957B / 957B                         0.2s
+ => => sha256:a5008f4a4b257356728e2feaf2b5b9e2054c0c577d324e76abbf14470b5f1cfd 1.40kB / 1.40kB                     0.3s
+ => => sha256:94d083cf706ab544ec7e9bcaba5c164db87b3d3a56176bf2fca440d535c16b0d 405B / 405B                         0.3s
+ => => sha256:e654dbbbb9e15a1fa035d24728aeeb60bc655f4ebd4d6215a496b77a7d104697 1.21kB / 1.21kB                     0.3s
+ => => sha256:fbaed3f7fcbe6a0d591ac8601934f1f05252cee42741fde9e950dce55580af18 20.28MB / 20.28MB                   1.1s
+ => => extracting sha256:43f834d60d8af3f133c7e76a202d28cd62cc026a561edca72ee752ef01bfaacd                          0.0s
+ => => extracting sha256:de1b677d8c003ce9e558f3a0cd4dec3c035f424ecddd68063043a593ad572257                          0.0s
+ => => extracting sha256:94d083cf706ab544ec7e9bcaba5c164db87b3d3a56176bf2fca440d535c16b0d                          0.0s
+ => => extracting sha256:e654dbbbb9e15a1fa035d24728aeeb60bc655f4ebd4d6215a496b77a7d104697                          0.0s
+ => => extracting sha256:a5008f4a4b257356728e2feaf2b5b9e2054c0c577d324e76abbf14470b5f1cfd                          0.0s
+ => => extracting sha256:fbaed3f7fcbe6a0d591ac8601934f1f05252cee42741fde9e950dce55580af18                          0.4s
+ => [api internal] load build context                                                                              0.1s
+ => => transferring context: 286.03kB                                                                              0.0s
+ => [api builder 2/8] WORKDIR /app                                                                                 0.5s
+ => [api builder 3/8] RUN npm install -g pnpm@latest --quiet                                                       1.6s
+ => [web builder 4/8] COPY pnpm-workspace.yaml pnpm-lock.yaml package.json tsconfig.json tsconfig.base.json ./     0.1s
+ => CACHED [api builder  4/10] COPY pnpm-workspace.yaml pnpm-lock.yaml package.json tsconfig.json tsconfig.base.j  0.0s
+ => [api builder  5/10] COPY lib/db/          ./lib/db/                                                            0.0s
+ => [web builder 5/8] COPY lib/               ./lib/                                                               0.0s
+ => [api builder  6/10] COPY lib/api-zod/     ./lib/api-zod/                                                       0.1s
+ => [web builder 6/8] COPY artifacts/triggeryomi/ ./artifacts/triggeryomi/                                         0.1s
+ => [api builder  7/10] COPY lib/api-spec/    ./lib/api-spec/                                                      0.0s
+ => CANCELED [web builder 7/8] RUN pnpm install --no-frozen-lockfile                                              12.7s
+ => [api builder  8/10] COPY artifacts/api-server/ ./artifacts/api-server/                                         0.0s
+ => ERROR [api builder  9/10] RUN pnpm install --no-frozen-lockfile                                               11.7s
+------
+ > [api builder  9/10] RUN pnpm install --no-frozen-lockfile:
+0.935 Scope: all 5 workspace projects
+1.165 ? Verifying lockfile against supply-chain policies (489 entries)...
+5.458 ✓ Lockfile passes supply-chain policies (489 entries in 4.2s)
+5.506 Progress: resolved 1, reused 0, downloaded 0, added 0
+5.515 artifacts/api-server                     | [WARN] deprecated @types/bcryptjs@3.0.0
+6.540 Progress: resolved 119, reused 0, downloaded 18, added 0
+7.542 Progress: resolved 263, reused 0, downloaded 38, added 0
+8.543 Progress: resolved 263, reused 0, downloaded 175, added 0
+8.966 Packages: +262
+8.966 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+9.411 Progress: resolved 263, reused 0, downloaded 262, added 262, done
+9.904 . preinstall$ sh -c 'rm -f package-lock.json yarn.lock; case "$npm_config_user_agent" in pnpm/*) ;; *) echo "Use pnpm instead" >&2; exit 1 ;; esac'
+9.973 . preinstall: Done
+10.03
+10.03 devDependencies:
+10.03 + prettier 3.8.3
+10.03 + typescript 5.9.3 (6.0.3 is available)
+10.03
+10.09 [ERR_PNPM_IGNORED_BUILDS] Ignored build scripts: esbuild@0.27.3
+10.09
+10.09 Run "pnpm approve-builds" to pick which dependencies should be allowed to run scripts.
+------
+[+] up 0/2
+ ⠙ Image triggeryomi-drone-shop-api Building                                                                       19.0s
+ ⠙ Image triggeryomi-drone-shop-web Building                                                                       19.0s
+Dockerfile.api:16
+
+--------------------
+
+  14 |     COPY artifacts/api-server/ ./artifacts/api-server/
+
+  15 |
+
+  16 | >>> RUN pnpm install --no-frozen-lockfile
+
+  17 |
+
+  18 |     # Build the esbuild bundle
+
+--------------------
+
+Dockerfile.api:34
+
+--------------------
+
+  32 |     COPY artifacts/api-server/ ./artifacts/api-server/
+
+  33 |
+
+  34 | >>> RUN pnpm install --no-frozen-lockfile
+
+  35 |
+
+  36 |     # Overwrite with the compiled bundle from the builder stage
+
+--------------------
+
+target api: failed to solve: process "/bin/sh -c pnpm install --no-frozen-lockfile" did not complete successfully: exit code: 1
+
+root@lab12:~/test/Triggeryomi-Drone-Shop#

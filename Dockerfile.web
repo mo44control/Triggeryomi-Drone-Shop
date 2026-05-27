@@ -4,12 +4,8 @@ WORKDIR /app
 
 RUN npm install -g pnpm@latest --quiet
 
-# Workspace root config
-COPY pnpm-workspace.yaml pnpm-lock.yaml package.json tsconfig.json tsconfig.base.json ./
-
-# Packages the web app needs (lib/* for generated hooks/types)
-COPY lib/               ./lib/
-COPY artifacts/triggeryomi/ ./artifacts/triggeryomi/
+# Copy full workspace so pnpm can resolve all packages correctly
+COPY . .
 
 RUN pnpm install --no-frozen-lockfile
 

@@ -4,14 +4,8 @@ WORKDIR /app
 
 RUN npm install -g pnpm@latest --quiet
 
-# Workspace root config
-COPY pnpm-workspace.yaml pnpm-lock.yaml package.json tsconfig.json tsconfig.base.json ./
-
-# Only the packages the API needs
-COPY lib/db/          ./lib/db/
-COPY lib/api-zod/     ./lib/api-zod/
-COPY lib/api-spec/    ./lib/api-spec/
-COPY artifacts/api-server/ ./artifacts/api-server/
+# Copy full workspace so pnpm can resolve all packages correctly
+COPY . .
 
 RUN pnpm install --no-frozen-lockfile
 
@@ -25,11 +19,7 @@ WORKDIR /app
 RUN npm install -g pnpm@latest --quiet
 
 # Keep full workspace for drizzle-kit migrations
-COPY pnpm-workspace.yaml pnpm-lock.yaml package.json tsconfig.json tsconfig.base.json ./
-COPY lib/db/          ./lib/db/
-COPY lib/api-zod/     ./lib/api-zod/
-COPY lib/api-spec/    ./lib/api-spec/
-COPY artifacts/api-server/ ./artifacts/api-server/
+COPY . .
 
 RUN pnpm install --no-frozen-lockfile
 
