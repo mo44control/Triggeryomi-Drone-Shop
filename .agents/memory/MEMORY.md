@@ -1,1 +1,2 @@
 - [Admin auth approach](admin-auth.md) — cookie-based auth (signed HttpOnly), bcryptjs password hash in settings table, default admin/admin
+- [Docker build environment](docker-build-env.md) — must use node:24-slim (Debian/glibc), NOT alpine; pnpm-workspace.yaml overrides exclude musl binaries

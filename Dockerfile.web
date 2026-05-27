@@ -1,5 +1,7 @@
 # ── Stage 1: build ──────────────────────────────────────────────────────────
-FROM node:24-alpine AS builder
+# Use Debian (glibc) — matches Replit's env; pnpm-workspace.yaml overrides
+# exclude musl binaries so Alpine (musl) builds will fail for rollup/tailwind/etc.
+FROM node:24-slim AS builder
 WORKDIR /app
 
 RUN npm install -g pnpm@10.11.0 --quiet

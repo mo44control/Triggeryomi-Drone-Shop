@@ -1,0 +1,152 @@
+transferring context: 712.46kB                                                                              0.1s
+ => [web internal] load build context                                                                              0.1s
+ => => transferring context: 712.46kB                                                                              0.1s
+ => CACHED [web stage-1 1/3] FROM docker.io/library/nginx:alpine@sha256:8b1e78743a03dbb2c95171cc58639fef29abc8816  0.0s
+ => CACHED [web builder 2/6] WORKDIR /app                                                                          0.0s
+ => CACHED [web builder 3/6] RUN npm install -g pnpm@latest --quiet                                                0.0s
+ => CACHED [web builder 4/6] COPY . .                                                                              0.0s
+ => ERROR [api builder 5/6] RUN pnpm install --no-frozen-lockfile                                                 14.2s
+------
+ > [api builder 5/6] RUN pnpm install --no-frozen-lockfile:
+0.977 Scope: all 8 workspace projects
+1.129 ? Verifying lockfile against supply-chain policies (489 entries)...
+4.198 ✓ Lockfile passes supply-chain policies (489 entries in 3s)
+4.256 Progress: resolved 1, reused 0, downloaded 0, added 0
+4.261 artifacts/api-server                     | [WARN] deprecated @types/bcryptjs@3.0.0
+4.897 artifacts/triggeryomi                    | [WARN] deprecated recharts@2.15.4
+5.257 Progress: resolved 82, reused 0, downloaded 34, added 0
+6.257 Progress: resolved 168, reused 0, downloaded 71, added 0
+7.270 Progress: resolved 222, reused 0, downloaded 75, added 0
+8.272 Progress: resolved 251, reused 0, downloaded 177, added 0
+9.272 Progress: resolved 279, reused 0, downloaded 258, added 0
+10.27 Progress: resolved 484, reused 0, downloaded 417, added 0
+10.91 Packages: +481
+10.91 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+11.27 Progress: resolved 486, reused 0, downloaded 480, added 161
+12.17 Progress: resolved 486, reused 0, downloaded 481, added 481, done
+12.54 . preinstall$ sh -c 'rm -f package-lock.json yarn.lock; case "$npm_config_user_agent" in pnpm/*) ;; *) echo "Use pnpm instead" >&2; exit 1 ;; esac'
+12.56 . preinstall: Done
+12.62
+12.62 devDependencies:
+12.62 + prettier 3.8.3
+12.62 + typescript 5.9.3 (6.0.3 is available)
+12.62
+12.67 [ERR_PNPM_IGNORED_BUILDS] Ignored build scripts: esbuild@0.27.3
+12.67
+12.67 Run "pnpm approve-builds" to pick which dependencies should be allowed to run scripts.
+------
+[+] up 0/2
+ ⠙ Image triggeryomi-drone-shop-web Building                                                                       14.8s
+ ⠙ Image triggeryomi-drone-shop-api Building                                                                       14.8s
+target web: failed to solve: process "/bin/sh -c pnpm install --no-frozen-lockfile" did not complete successfully: exit code: 1
+
+root@lab12:~/test/Triggeryomi-Drone-Shop# git pull && docker compose up --build
+remote: Enumerating objects: 12, done.
+remote: Counting objects: 100% (12/12), done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 7 (delta 5), reused 7 (delta 5), pack-reused 0 (from 0)
+Unpacking objects: 100% (7/7), 2.78 KiB | 2.78 MiB/s, done.
+From https://github.com/mo44control/Triggeryomi-Drone-Shop
+   0a7cf28..f6a4d57  main       -> origin/main
+Updating 0a7cf28..f6a4d57
+Fast-forward
+ Dockerfile.api                                                              |   4 +-
+ Dockerfile.web                                                              |   2 +-
+ ...22-COPY-23-24-RUN-pnpm-install-no-frozen-lockfile-25-2_1779850412582.txt | 101 ++++++++++++++++++++++++++++++++++++
+ package.json                                                                |   9 ++++
+ 4 files changed, 113 insertions(+), 3 deletions(-)
+ create mode 100644 attached_assets/Pasted--22-COPY-23-24-RUN-pnpm-install-no-frozen-lockfile-25-2_1779850412582.txt
+WARN[0000] /root/test/Triggeryomi-Drone-Shop/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion
+[+] Building 15.7s (19/24)
+ => [internal] load local bake definitions                                                                         0.0s
+ => => reading from stdin 993B                                                                                     0.0s
+ => [api internal] load build definition from Dockerfile.api                                                       0.0s
+ => => transferring dockerfile: 1.18kB                                                                             0.0s
+ => [web internal] load build definition from Dockerfile.web                                                       0.0s
+ => => transferring dockerfile: 963B                                                                               0.0s
+ => [api internal] load metadata for docker.io/library/node:24-alpine                                              0.1s
+ => [web internal] load metadata for docker.io/library/nginx:alpine                                                0.1s
+ => [web internal] load .dockerignore                                                                              0.0s
+ => => transferring context: 189B                                                                                  0.0s
+ => [api internal] load .dockerignore                                                                              0.0s
+ => => transferring context: 189B                                                                                  0.0s
+ => [api builder 1/6] FROM docker.io/library/node:24-alpine@sha256:2bdb65ed1dab192432bc31c95f94155ca5ad7fc1392fb7  0.0s
+ => [web internal] load build context                                                                              0.0s
+ => => transferring context: 14.07kB                                                                               0.0s
+ => CACHED [web stage-1 1/3] FROM docker.io/library/nginx:alpine@sha256:8b1e78743a03dbb2c95171cc58639fef29abc8816  0.0s
+ => CACHED [web builder 2/6] WORKDIR /app                                                                          0.0s
+ => [web builder 3/6] RUN npm install -g pnpm@10.11.0 --quiet                                                      1.9s
+ => [api internal] load build context                                                                              0.0s
+ => => transferring context: 14.07kB                                                                               0.0s
+ => [web builder 4/6] COPY . .                                                                                     0.1s
+ => [web builder 5/6] RUN pnpm install --no-frozen-lockfile                                                       12.4s
+ => CACHED [api builder 4/6] COPY . .                                                                              0.0s
+ => CACHED [api builder 5/6] RUN pnpm install --no-frozen-lockfile                                                 0.0s
+ => CANCELED [api builder 6/6] RUN pnpm --filter @workspace/api-server run build                                   1.1s
+ => ERROR [web builder 6/6] RUN pnpm --filter @workspace/triggeryomi run build                                     1.0s
+------
+ > [web builder 6/6] RUN pnpm --filter @workspace/triggeryomi run build:
+0.664
+0.664 > @workspace/triggeryomi@0.0.0 build /app/artifacts/triggeryomi
+0.664 > vite build --config vite.config.ts
+0.664
+0.856 /app/node_modules/.pnpm/rollup@4.60.3/node_modules/rollup/dist/native.js:115
+0.856           throw new Error(
+0.856                 ^
+0.856
+0.856 Error: Cannot find module @rollup/rollup-linux-x64-musl. npm has a bug related to optional dependencies (https://github.com/npm/cli/issues/4828). Please try `npm i` again after removing both package-lock.json and node_modules directory.
+0.856     at requireWithFriendlyError (/app/node_modules/.pnpm/rollup@4.60.3/node_modules/rollup/dist/native.js:115:9)
+0.856     at Object.<anonymous> (/app/node_modules/.pnpm/rollup@4.60.3/node_modules/rollup/dist/native.js:124:76)
+0.856     at Module._compile (node:internal/modules/cjs/loader:1854:14)
+0.856     at Object..js (node:internal/modules/cjs/loader:1985:10)
+0.856     at Module.load (node:internal/modules/cjs/loader:1577:32)
+0.856     at Module._load (node:internal/modules/cjs/loader:1379:12)
+0.856     at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+0.856     at loadCJSModuleWithModuleLoad (node:internal/modules/esm/translators:326:3)
+0.856     at ModuleWrap.<anonymous> (node:internal/modules/esm/translators:231:7)
+0.856     at ModuleJob.run (node:internal/modules/esm/module_job:439:25) {
+0.856   [cause]: Error: Cannot find module '@rollup/rollup-linux-x64-musl'
+0.856   Require stack:
+0.856   - /app/node_modules/.pnpm/rollup@4.60.3/node_modules/rollup/dist/native.js
+0.856       at Module._resolveFilename (node:internal/modules/cjs/loader:1500:15)
+0.856       at wrapResolveFilename (node:internal/modules/cjs/loader:1071:27)
+0.856       at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1095:10)
+0.856       at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1116:12)
+0.856       at Module._load (node:internal/modules/cjs/loader:1285:25)
+0.856       at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+0.856       at Module.require (node:internal/modules/cjs/loader:1600:12)
+0.856       at require (node:internal/modules/helpers:153:16)
+0.856       at requireWithFriendlyError (/app/node_modules/.pnpm/rollup@4.60.3/node_modules/rollup/dist/native.js:97:10)
+0.856       at Object.<anonymous> (/app/node_modules/.pnpm/rollup@4.60.3/node_modules/rollup/dist/native.js:124:76) {
+0.856     code: 'MODULE_NOT_FOUND',
+0.856     requireStack: [
+0.856       '/app/node_modules/.pnpm/rollup@4.60.3/node_modules/rollup/dist/native.js'
+0.856     ]
+0.856   }
+0.856 }
+0.856
+0.856 Node.js v24.16.0
+0.895 /app/artifacts/triggeryomi:
+0.895  ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @workspace/triggeryomi@0.0.0 build: `vite build --config vite.config.ts`
+0.895 Exit status 1
+------
+[+] up 0/2
+ ⠙ Image triggeryomi-drone-shop-web Building                                                                       15.8s
+ ⠙ Image triggeryomi-drone-shop-api Building                                                                       15.8s
+Dockerfile.web:17
+
+--------------------
+
+  15 |     ENV NODE_ENV=production
+
+  16 |
+
+  17 | >>> RUN pnpm --filter @workspace/triggeryomi run build
+
+  18 |
+
+  19 |     # ── Stage 2: serve ───────────────────────────────────────────────────────────
+
+--------------------
+
+target web: failed to solve: process "/bin/sh -c pnpm --filter @workspace/triggeryomi run build" did not complete successfully: exit code: 1
