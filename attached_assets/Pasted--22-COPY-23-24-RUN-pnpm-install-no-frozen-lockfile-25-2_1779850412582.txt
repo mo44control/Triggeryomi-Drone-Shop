@@ -1,0 +1,101 @@
+
+  22 |     COPY . .
+
+  23 |
+
+  24 | >>> RUN pnpm install --no-frozen-lockfile
+
+  25 |
+
+  26 |     # Overwrite with the compiled bundle from the builder stage
+
+--------------------
+
+target api: failed to solve: process "/bin/sh -c pnpm install --no-frozen-lockfile" did not complete successfully: exit code: 1
+
+root@lab12:~/test/Triggeryomi-Drone-Shop# docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+root@lab12:~/test/Triggeryomi-Drone-Shop# git pull
+Already up to date.
+root@lab12:~/test/Triggeryomi-Drone-Shop# git clone https://github.com/mo44control/Triggeryomi-Drone-Shop/^C
+root@lab12:~/test/Triggeryomi-Drone-Shop# ^C
+root@lab12:~/test/Triggeryomi-Drone-Shop# cd ..
+root@lab12:~/test# rm -rf Triggeryomi-Drone-Shop/
+root@lab12:~/test#
+root@lab12:~/test#
+root@lab12:~/test#
+root@lab12:~/test#
+root@lab12:~/test# git clone https://github.com/mo44control/Triggeryomi-Drone-Shop/
+Cloning into 'Triggeryomi-Drone-Shop'...
+remote: Enumerating objects: 312, done.
+remote: Counting objects: 100% (312/312), done.
+remote: Compressing objects: 100% (219/219), done.
+remote: Total 312 (delta 87), reused 304 (delta 79), pack-reused 0 (from 0)
+Receiving objects: 100% (312/312), 262.23 KiB | 6.72 MiB/s, done.
+Resolving deltas: 100% (87/87), done.
+root@lab12:~/test# cd Triggeryomi-Drone-Shop/
+root@lab12:~/test/Triggeryomi-Drone-Shop#
+root@lab12:~/test/Triggeryomi-Drone-Shop#
+root@lab12:~/test/Triggeryomi-Drone-Shop#
+root@lab12:~/test/Triggeryomi-Drone-Shop#
+root@lab12:~/test/Triggeryomi-Drone-Shop# git pull && docker compose up --build
+Already up to date.
+WARN[0000] /root/test/Triggeryomi-Drone-Shop/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion
+[+] Building 14.7s (15/24)
+ => [internal] load local bake definitions                                                                         0.0s
+ => => reading from stdin 993B                                                                                     0.0s
+ => [web internal] load build definition from Dockerfile.web                                                       0.0s
+ => => transferring dockerfile: 962B                                                                               0.0s
+ => [api internal] load build definition from Dockerfile.api                                                       0.0s
+ => => transferring dockerfile: 1.18kB                                                                             0.0s
+ => [web internal] load metadata for docker.io/library/nginx:alpine                                                0.2s
+ => [api internal] load metadata for docker.io/library/node:24-alpine                                              0.2s
+ => [api internal] load .dockerignore                                                                              0.0s
+ => => transferring context: 189B                                                                                  0.0s
+ => [web internal] load .dockerignore                                                                              0.0s
+ => => transferring context: 189B                                                                                  0.0s
+ => [web builder 1/6] FROM docker.io/library/node:24-alpine@sha256:2bdb65ed1dab192432bc31c95f94155ca5ad7fc1392fb7  0.0s
+ => [api internal] load build context                                                                              0.1s
+ => => transferring context: 712.46kB                                                                              0.1s
+ => [web internal] load build context                                                                              0.1s
+ => => transferring context: 712.46kB                                                                              0.1s
+ => CACHED [web stage-1 1/3] FROM docker.io/library/nginx:alpine@sha256:8b1e78743a03dbb2c95171cc58639fef29abc8816  0.0s
+ => CACHED [web builder 2/6] WORKDIR /app                                                                          0.0s
+ => CACHED [web builder 3/6] RUN npm install -g pnpm@latest --quiet                                                0.0s
+ => CACHED [web builder 4/6] COPY . .                                                                              0.0s
+ => ERROR [api builder 5/6] RUN pnpm install --no-frozen-lockfile                                                 14.2s
+------
+ > [api builder 5/6] RUN pnpm install --no-frozen-lockfile:
+0.977 Scope: all 8 workspace projects
+1.129 ? Verifying lockfile against supply-chain policies (489 entries)...
+4.198 ✓ Lockfile passes supply-chain policies (489 entries in 3s)
+4.256 Progress: resolved 1, reused 0, downloaded 0, added 0
+4.261 artifacts/api-server                     | [WARN] deprecated @types/bcryptjs@3.0.0
+4.897 artifacts/triggeryomi                    | [WARN] deprecated recharts@2.15.4
+5.257 Progress: resolved 82, reused 0, downloaded 34, added 0
+6.257 Progress: resolved 168, reused 0, downloaded 71, added 0
+7.270 Progress: resolved 222, reused 0, downloaded 75, added 0
+8.272 Progress: resolved 251, reused 0, downloaded 177, added 0
+9.272 Progress: resolved 279, reused 0, downloaded 258, added 0
+10.27 Progress: resolved 484, reused 0, downloaded 417, added 0
+10.91 Packages: +481
+10.91 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+11.27 Progress: resolved 486, reused 0, downloaded 480, added 161
+12.17 Progress: resolved 486, reused 0, downloaded 481, added 481, done
+12.54 . preinstall$ sh -c 'rm -f package-lock.json yarn.lock; case "$npm_config_user_agent" in pnpm/*) ;; *) echo "Use pnpm instead" >&2; exit 1 ;; esac'
+12.56 . preinstall: Done
+12.62
+12.62 devDependencies:
+12.62 + prettier 3.8.3
+12.62 + typescript 5.9.3 (6.0.3 is available)
+12.62
+12.67 [ERR_PNPM_IGNORED_BUILDS] Ignored build scripts: esbuild@0.27.3
+12.67
+12.67 Run "pnpm approve-builds" to pick which dependencies should be allowed to run scripts.
+------
+[+] up 0/2
+ ⠙ Image triggeryomi-drone-shop-web Building                                                                       14.8s
+ ⠙ Image triggeryomi-drone-shop-api Building                                                                       14.8s
+target web: failed to solve: process "/bin/sh -c pnpm install --no-frozen-lockfile" did not complete successfully: exit code: 1
+
+root@lab12:~/test/Triggeryomi-Drone-Shop#

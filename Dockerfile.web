@@ -2,7 +2,7 @@
 FROM node:24-alpine AS builder
 WORKDIR /app
 
-RUN npm install -g pnpm@latest --quiet
+RUN npm install -g pnpm@10.11.0 --quiet
 
 # Copy full workspace so pnpm can resolve all packages correctly
 COPY . .
