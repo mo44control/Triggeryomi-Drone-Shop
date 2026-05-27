@@ -1,0 +1,35 @@
+t@lab12:~# cd test
+root@lab12:~/test# git clone github.com/mo44control/Triggeryomi-Drone-Shop
+fatal: repository 'github.com/mo44control/Triggeryomi-Drone-Shop' does not exist
+root@lab12:~/test# git clone github.com/mo44control/Triggeryomi-Drone-Shop/
+fatal: repository 'github.com/mo44control/Triggeryomi-Drone-Shop/' does not exist
+root@lab12:~/test# git clone https://github.com/mo44control/Triggeryomi-Drone-Shop/
+Cloning into 'Triggeryomi-Drone-Shop'...
+remote: Enumerating objects: 293, done.
+remote: Counting objects: 100% (293/293), done.
+remote: Compressing objects: 100% (206/206), done.
+remote: Total 293 (delta 77), reused 289 (delta 73), pack-reused 0 (from 0)
+Receiving objects: 100% (293/293), 255.40 KiB | 5.67 MiB/s, done.
+Resolving deltas: 100% (77/77), done.
+root@lab12:~/test# ls
+Triggeryomi-Drone-Shop
+root@lab12:~/test# cd Triggeryomi-Drone-Shop/
+root@lab12:~/test/Triggeryomi-Drone-Shop#
+root@lab12:~/test/Triggeryomi-Drone-Shop#
+root@lab12:~/test/Triggeryomi-Drone-Shop#
+root@lab12:~/test/Triggeryomi-Drone-Shop# docker compose up --build
+WARN[0000] /root/test/Triggeryomi-Drone-Shop/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion
+[+] up 12/12
+ ✔ Image postgres:16-alpine Pulled                                                                                  6.0s
+[+] Building 0.2s (3/3) FINISHED
+ => [internal] load local bake definitions                                                                         0.0s
+ => => reading from stdin 993B                                                                                     0.0s
+ => [api internal] load build definition from Dockerfile.api                                                       0.0s
+ => => transferring dockerfile: 2B                                                                                 0.0s
+[+] up 12/14ernal] load build definition from Dockerfile.web                                                       0.0s
+ ✔ Image postgres:16-alpine         Pulled                                                                          6.0s
+ ⠙ Image triggeryomi-drone-shop-web Building                                                                        0.3s
+ ⠙ Image triggeryomi-drone-shop-api Building                                                                        0.3s
+target web: failed to solve: failed to read dockerfile: open Dockerfile.web: no such file or directory
+
+root@lab12:~/test/Triggeryomi-Drone-Shop#
