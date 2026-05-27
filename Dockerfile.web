@@ -1,0 +1,27 @@
+# ── Stage 1: build ──────────────────────────────────────────────────────────
+FROM node:24-alpine AS builder
+WORKDIR /app
+
+RUN npm install -g pnpm@latest --quiet
+
+# Workspace root config
+COPY pnpm-workspace.yaml pnpm-lock.yaml package.json tsconfig.json tsconfig.base.json ./
+
+# Packages the web app needs (lib/* for generated hooks/types)
+COPY lib/               ./lib/
+COPY artifacts/triggeryomi/ ./artifacts/triggeryomi/
+
+RUN pnpm install --no-frozen-lockfile
+
+# Vite requires PORT and BASE_PATH at config-parse time
+ENV PORT=3000
+ENV BASE_PATH=/
+ENV NODE_ENV=production
+
+RUN pnpm --filter @workspace/triggeryomi run build
+
+# ── Stage 2: serve ───────────────────────────────────────────────────────────
+FROM nginx:alpine
+COPY --from=builder /app/artifacts/triggeryomi/dist/public /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+EXPOSE 80

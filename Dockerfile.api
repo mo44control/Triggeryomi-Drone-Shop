@@ -1,0 +1,46 @@
+# ── Stage 1: build ──────────────────────────────────────────────────────────
+FROM node:24-alpine AS builder
+WORKDIR /app
+
+RUN npm install -g pnpm@latest --quiet
+
+# Workspace root config
+COPY pnpm-workspace.yaml pnpm-lock.yaml package.json tsconfig.json tsconfig.base.json ./
+
+# Only the packages the API needs
+COPY lib/db/          ./lib/db/
+COPY lib/api-zod/     ./lib/api-zod/
+COPY lib/api-spec/    ./lib/api-spec/
+COPY artifacts/api-server/ ./artifacts/api-server/
+
+RUN pnpm install --no-frozen-lockfile
+
+# Build the esbuild bundle
+RUN pnpm --filter @workspace/api-server run build
+
+# ── Stage 2: run ─────────────────────────────────────────────────────────────
+FROM node:24-alpine
+WORKDIR /app
+
+RUN npm install -g pnpm@latest --quiet
+
+# Keep full workspace for drizzle-kit migrations
+COPY pnpm-workspace.yaml pnpm-lock.yaml package.json tsconfig.json tsconfig.base.json ./
+COPY lib/db/          ./lib/db/
+COPY lib/api-zod/     ./lib/api-zod/
+COPY lib/api-spec/    ./lib/api-spec/
+COPY artifacts/api-server/ ./artifacts/api-server/
+
+RUN pnpm install --no-frozen-lockfile
+
+# Overwrite with the compiled bundle from the builder stage
+COPY --from=builder /app/artifacts/api-server/dist ./artifacts/api-server/dist
+
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+ENV PORT=8080
+ENV NODE_ENV=production
+EXPOSE 8080
+
+ENTRYPOINT ["/entrypoint.sh"]
